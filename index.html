@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>투자 MBTI 테스트</title>
+  <style>
+    body {
+      background-color: #FFE4E1;
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+    }
+    .question-container {
+      background-color: #FFCCD5;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    .question {
+      margin-bottom: 15px;
+    }
+    .question h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+    }
+    .options label {
+      display: block;
+      margin-bottom: 5px;
+      cursor: pointer;
+    }
+    button {
+      background-color: #FF8FA3;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      color: #fff;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #FF6F87;
+    }
+    /* 결과 페이지 스타일 */
+    .result-container {
+      display: none;
+      text-align: center;
+    }
+    .result-title {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+    .result-slogan {
+      font-size: 18px;
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+    .result-description {
+      margin: 20px 0;
+    }
+    .character-image {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 20px;
+    }
+    .bar-container {
+      margin: 15px 0;
+      text-align: left;
+    }
+    .bar-label {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    .bar {
+      width: 100%;
+      background-color: #ddd;
+      height: 20px;
+      border-radius: 10px;
+      overflow: hidden;
+      display: flex;
+    }
+    .bar-left {
+      height: 100%;
+      background-color: #FFB6C1; /* 연핑크 */
+      text-align: right;
+      padding-right: 5px;
+      line-height: 20px;
+      color: #fff;
+    }
+    .bar-right {
+      height: 100%;
+      background-color: #ADD8E6; /* 연하늘색 */
+      text-align: left;
+      padding-left: 5px;
+      line-height: 20px;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- 질문 영역 -->
+    <div id="quiz-section" class="question-container">
+      <h2>투자 MBTI 테스트</h2>
+      <form id="quiz-form">
+        <!-- 20개의 질문 (각 5문제씩 4MBTI 척도: E/I, S/N, T/F, P/J) -->
+        <!-- 예시로 질문 텍스트는 "질문 1", "질문 2" 등으로 대체 -->
+        <!-- 질문 1 ~ 5 : E/I -->
+        <div class="question">
+          <h3>질문 1. 투자 결정을 내릴 때 직관보다 분석을 중시한다.</h3>
+          <div class="options">
+            <label><input type="radio" name="q1" value="2"> 매우 그렇다 (+2)</label>
+            <label><input type="radio" name="q1" value="1"> 그렇다 (+1)</label>
+            <label><input type="radio" name="q1" value="-1"> 아니다 (-1)</label>
+            <label><input type="radio" name="q1" value="-2"> 전혀 아니다 (-2)</label>
+          </div>
+        </div>
+        <div class="question">
+          <h3>질문 2. 감정보다 데이터를 중시하여 투자한다.</h3>
+          <div class="options">
+            <label><input type="radio" name="q2" value="2"> 매우 그렇다 (+2)</label>
+            <label><input type="radio" name="q2" value="1"> 그렇다 (+1)</label>
+            <label><input type="radio" name="q2" value="-1"> 아니다 (-1)</label>
+            <label><input type="radio" name="q2" value="-2"> 전혀 아니다 (-2)</label>
+          </div>
+        </div>
+        <div class="question">
+          <h3>질문 3. 투자전략 수립 시 체계적인 계획을 선호한다.</h3>
+          <div class="options">
+            <label><input type="radio" name="q3" value="2"> 매우 그렇다 (+2)</label>
+            <label><input type="radio" name="q3" value="1"> 그렇다 (+1)</label>
+            <label><input type="radio" name="q3" value="-1"> 아니다 (-1)</label>
+            <label><input type="radio" name="q3" value="-2"> 전혀 아니다 (-2)</label>
+          </div>
+        </div>
+        <div class="question">
+          <h3>질문 4. 투자 결정을 내릴 때 외부 의견보다 자신의 분석을 믿는다.</h3>
+          <div class="options">
+            <label><input type="radio" name="q4" value="2"> 매우 그렇다 (+2)</label>
+            <label><input type="radio" name="q4" value="1"> 그렇다 (+1)</label>
+            <label><input type="radio" name="q4" value="-1"> 아니다 (-1)</label>
+            <label><input type="radio" name="q4" value="-2"> 전혀 아니다 (-2)</label>
+          </div>
+        </div>
+        <div class="question">
+          <h3>질문 5. 투자 시 계획과 목표를 명확히 세운다.</h3>
+          <div class="options">
+            <label><input type="radio" name="q5" value="2"> 매우 그렇다 (+2)</label>
+            <label><input type="radio" name="q5" value="1"> 그렇다 (+1)</label>
+            <label><input type="radio" name="q5" value="-1"> 아니다 (-1)</label>
+            <label><input type="radio" name="q5" value="-2"> 전혀 아니다 (-2)</label>
+          </div>
+        </div>
+        <!-- 질문 6 ~ 10 : S/N -->
+        <div class="question">
+          <h3>질문 6. 투자 상품의 세부 정보보다 전체 흐름을 중시한다.</h3>
+          <div class="options">
+            <label><input type="radio" name="q6" value="2"> 매우 그렇다 (+2)</label>
+            <label><input type="radio" name="q6" value="1"> 그렇다 (+1)</label>
+            <label><input type="radio" name="q6" value="-1"> 아니다 (-1)</label>
+            <label><input type="radio" name="q6" value="-2"> 전혀 아니다 (-2)</label>
+          </div>
+        </div>
+        <div class="question">
+          <h3>질문 7. 세부 분석보다는 미래 가능성에 투자한다.</h3>
+          <div class="options">
+            <label><input type="radio" name="q7" value="2"> 매우 그렇다 (+2)</label>
+            <label><input type="radio" name="q7" value="1"> 그렇다 (+1)</label>
+            <label><input type="radio" name="q7" value="-1"> 아니다 (-1)</label>
+            <label><input type="radio" name="q7" value="-2"> 전혀 아니다 (-2)</label>
+          </div>
+        </div>
+        <div class="question">
+          <h3>질문 8. 투자 상품의 미래 트렌드에 관심이 많다.</h3>
+          <div class="options">
+            <label><input type="radio" name="q8" value="2"> 매우 그렇다 (+2)</label>
+            <label><input type="radio" name="q8" value="1"> 그렇다 (+1)</label>
+            <label><input type="radio" name="q8" value="-1"> 아니다 (-1)</label>
+            <label><input type="radio" name="q8" value="-2"> 전혀 아니다 (-2)</label>
+          </div>
+        </div>
+        <div class="question">
+          <h3>질문 9. 투자 시 세부 데이터보다는 큰 그림을 선호한다.</h3>
+          <div class="options">
+            <label><input type="radio" name="q9" value="2"> 매우 그렇다 (+2)</label>
+            <label><input type="radio" name="q9" value="1"> 그렇다 (+1)</label>
+            <label><input type="radio" name="q9" value="-1"> 아니다 (-1)</label>
+            <label><input type="radio" name="q9" value="-2"> 전혀 아니다 (-2)</label>
+          </div>
+        </div>
+        <div class="question">
+          <h3>질문 10. 투자 결정 시 직관과 감각 사이의 균형을 찾는다.</h3>
+          <div class="options">
+            <label><input type="radio" name="q10" value="2"> 매우 그렇다 (+2)</label>
+            <label><input type="radio" name="q10" value="1"> 그렇다 (+1)</label>
+            <label><input type="radio" name="q10" value="-1"> 아니다 (-1)</label>
+            <label><input type="radio" name="q10" value="-2"> 전혀 아니다 (-2)</label>
+          </div>
+        </div>
+        <!-- 질문 11 ~ 15 : T/F -->
+        <div class="question">
+          <h3>질문 11. 투자 결정을 내릴 때 감정보다 사실과 논리를 우선시한다.</h3>
+          <div class="options">
+            <label><input type="radio" name="q11" value="2"> 매우 그렇다 (+2)</label>
+            <label><input type="radio" name="q11" value="1"> 그렇다 (+1)</label>
+            <label><input type="radio" name="q11" value="-1"> 아니다 (-1)</label>
+            <label><input type="radio" name="q11" value="-2"> 전혀 아니다 (-2)</label>
+          </div>
+        </div>
+        <div class="question">
+          <h3>질문 12. 투자 시 감정보다는 객관적인 데이터를 신뢰한다.</h3>
+          <div class="options">
+            <label><input type="radio" name="q12" value="2"> 매우 그렇다 (+2)</label>
+            <label><input type="radio" name="q12" value="1"> 그렇다 (+1)</label>
+            <label><input type="radio" name="q12" value="-1"> 아니다 (-1)</label>
+            <label><input type="radio" name="q12" value="-2"> 전혀 아니다 (-2)</label>
+          </div>
+        </div>
+        <div class="question">
+          <h3>질문 13. 투자 분석 시 숫자와 데이터를 중시한다.</h3>
+          <div class="options">
+            <label><input type="radio" name="q13" value="2"> 매우 그렇다 (+2)</label>
+            <label><input type="radio" name="q13" value="1"> 그렇다 (+1)</label>
+            <label><input type="radio" name="q13" value="-1"> 아니다 (-1)</label>
+            <label><input type="radio" name="q13" value="-2"> 전혀 아니다 (-2)</label>
+          </div>
+        </div>
+        <div class="question">
+          <h3>질문 14. 투자 시 감정보다 사실에 기반한 결정을 선호한다.</h3>
+          <div class="options">
+            <label><input type="radio" name="q14" value="2"> 매우 그렇다 (+2)</label>
+            <label><input type="radio" name="q14" value="1"> 그렇다 (+1)</label>
+            <label><input type="radio" name="q14" value="-1"> 아니다 (-1)</label>
+            <label><input type="radio" name="q14" value="-2"> 전혀 아니다 (-2)</label>
+          </div>
+        </div>
+        <div class="question">
+          <h3>질문 15. 투자 분석 시 직관보다는 논리적인 근거를 중시한다.</h3>
+          <div class="options">
+            <label><input type="radio" name="q15" value="2"> 매우 그렇다 (+2)</label>
+            <label><input type="radio" name="q15" value="1"> 그렇다 (+1)</label>
+            <label><input type="radio" name="q15" value="-1"> 아니다 (-1)</label>
+            <label><input type="radio" name="q15" value="-2"> 전혀 아니다 (-2)</label>
+          </div>
+        </div>
+        <!-- 질문 16 ~ 20 : P/J -->
+        <div class="question">
+          <h3>질문 16. 투자 시 유연하게 대응하는 것을 선호한다.</h3>
+          <div class="options">
+            <label><input type="radio" name="q16" value="2"> 매우 그렇다 (+2)</label>
+            <label><input type="radio" name="q16" value="1"> 그렇다 (+1)</label>
+            <label><input type="radio" name="q16" value="-1"> 아니다 (-1)</label>
+            <label><input type="radio" name="q16" value="-2"> 전혀 아니다 (-2)</label>
+          </div>
+        </div>
+        <div class="question">
+          <h3>질문 17. 투자 계획보다는 상황에 따른 유동적 대응을 중시한다.</h3>
+          <div class="options">
+            <label><input type="radio" name="q17" value="2"> 매우 그렇다 (+2)</label>
+            <label><input type="radio" name="q17" value="1"> 그렇다 (+1)</label>
+            <label><input type="radio" name="q17" value="-1"> 아니다 (-1)</label>
+            <label><input type="radio" name="q17" value="-2"> 전혀 아니다 (-2)</label>
+          </div>
+        </div>
+        <div class="question">
+          <h3>질문 18. 투자 시 자유로운 선택이 중요하다고 생각한다.</h3>
+          <div class="options">
+            <label><input type="radio" name="q18" value="2"> 매우 그렇다 (+2)</label>
+            <label><input type="radio" name="q18" value="1"> 그렇다 (+1)</label>
+            <label><input type="radio" name="q18" value="-1"> 아니다 (-1)</label>
+            <label><input type="radio" name="q18" value="-2"> 전혀 아니다 (-2)</label>
+          </div>
+        </div>
+        <div class="question">
+          <h3>질문 19. 투자 결정 시 규칙보다는 상황에 맞는 융통성을 중요시한다.</h3>
+          <div class="options">
+            <label><input type="radio" name="q19" value="2"> 매우 그렇다 (+2)</label>
+            <label><input type="radio" name="q19" value="1"> 그렇다 (+1)</label>
+            <label><input type="radio" name="q19" value="-1"> 아니다 (-1)</label>
+            <label><input type="radio" name="q19" value="-2"> 전혀 아니다 (-2)</label>
+          </div>
+        </div>
+        <div class="question">
+          <h3>질문 20. 투자 시 계획된 전략보다는 그때그때의 판단을 믿는다.</h3>
+          <div class="options">
+            <label><input type="radio" name="q20" value="2"> 매우 그렇다 (+2)</label>
+            <label><input type="radio" name="q20" value="1"> 그렇다 (+1)</label>
+            <label><input type="radio" name="q20" value="-1"> 아니다 (-1)</label>
+            <label><input type="radio" name="q20" value="-2"> 전혀 아니다 (-2)</label>
+          </div>
+        </div>
+        <div style="text-align: center; margin-top:20px;">
+          <button type="button" onclick="calculateResult()">결과 보기</button>
+        </div>
+      </form>
+    </div>
+    
+    <!-- 결과 영역 -->
+    <div id="result-section" class="result-container">
+      <div class="result-title" id="result-title"></div>
+      <div class="result-slogan" id="result-slogan"></div>
+      <img id="character-image" class="character-image" src="" alt="캐릭터 이미지">
+      <div class="result-description" id="result-description"></div>
+      <!-- 척도 바 그래프 영역 -->
+      <div id="bars"></div>
+      <div style="margin-top:20px;">
+        <button onclick="location.reload()">테스트 다시하기</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // MBTI 결과 데이터 (16개 유형)
+    const mbtiResults = {
+      "ESTP": {
+        title: "💼 모험을 즐기는 투자자 (ESTP)",
+        slogan: "빠른 판단과 대담한 투자로 기회를 잡는다!",
+        description: "당신은 시장의 흐름을 빠르게 파악하고, 대담한 투자 결정을 내리는 모험가형 투자자입니다. 🚀",
+        image: "https://via.placeholder.com/150?text=ESTP"
+      },
+      "ESTJ": {
+        title: "📊 현실적인 투자자 (ESTJ)",
+        slogan: "체계적 계획과 명확한 기준으로 투자한다!",
+        description: "당신은 명확한 기준과 계획에 따라 투자를 진행하는 현실적인 투자자입니다. 📈",
+        image: "https://via.placeholder.com/150?text=ESTJ"
+      },
+      "ESFP": {
+        title: "🎉 즐거운 투자자 (ESFP)",
+        slogan: "시장도, 삶도 즐기는 당신의 투자 방식!",
+        description: "당신은 긍정적인 에너지와 유연한 판단으로 투자 기회를 즐기는 타입입니다. 😊",
+        image: "https://via.placeholder.com/150?text=ESFP"
+      },
+      "ESFJ": {
+        title: "🤝 신뢰받는 투자자 (ESFJ)",
+        slogan: "협력과 신뢰를 바탕으로 안정적인 투자를 지향한다!",
+        description: "당신은 사람과의 관계를 중시하며, 신뢰를 기반으로 투자 결정을 내리는 따뜻한 투자자입니다. 🤗",
+        image: "https://via.placeholder.com/150?text=ESFJ"
+      },
+      "ENTP": {
+        title: "🧠 혁신적인 투자자 (ENTP)",
+        slogan: "새로운 아이디어와 도전을 즐긴다!",
+        description: "당신은 창의적인 아이디어와 논리적인 분석으로 투자 시장을 혁신하는 타입입니다. 💡",
+        image: "https://via.placeholder.com/150?text=ENTP"
+      },
+      "ENTJ": {
+        title: "🚀 리더형 투자자 (ENTJ)",
+        slogan: "전략적 계획과 결단력으로 미래를 개척한다!",
+        description: "당신은 리더십과 명확한 목표를 가지고 투자 시장을 선도하는 타입입니다. 🔥",
+        image: "https://via.placeholder.com/150?text=ENTJ"
+      },
+      "ENFP": {
+        title: "🌟 열정적인 투자자 (ENFP)",
+        slogan: "다양한 기회 속에서 열정을 불태운다!",
+        description: "당신은 창의성과 열정을 바탕으로 투자 시장에서 새로운 기회를 발견합니다. ✨",
+        image: "https://via.placeholder.com/150?text=ENFP"
+      },
+      "ENFJ": {
+        title: "💖 감성 리더 투자자 (ENFJ)",
+        slogan: "타인의 신뢰와 협력을 통해 성공적인 투자를 이끈다!",
+        description: "당신은 사람 중심의 접근법으로 투자에서 따뜻한 성공을 거두는 타입입니다. 🤝",
+        image: "https://via.placeholder.com/150?text=ENFJ"
+      },
+      "ISTP": {
+        title: "🔧 분석가 투자자 (ISTP)",
+        slogan: "철저한 분석과 실용적인 판단으로 움직인다!",
+        description: "당신은 논리적 분석과 현실적인 접근을 통해 투자 결정을 내리는 타입입니다. ⚙️",
+        image: "https://via.placeholder.com/150?text=ISTP"
+      },
+      "ISTJ": {
+        title: "📚 신중한 투자자 (ISTJ)",
+        slogan: "체계와 원칙을 중시하는 신뢰의 투자자!",
+        description: "당신은 규칙과 체계에 기반해 신중하게 투자하는 타입입니다. 🗂️",
+        image: "https://via.placeholder.com/150?text=ISTJ"
+      },
+      "ISFP": {
+        title: "🎨 감성 투자자 (ISFP)",
+        slogan: "감각적인 선택으로 투자에도 예술을 담는다!",
+        description: "당신은 감각과 직관을 바탕으로 투자 시장에 개성을 불어넣는 타입입니다. 🌸",
+        image: "https://via.placeholder.com/150?text=ISFP"
+      },
+      "ISFJ": {
+        title: "🏡 안정 지향 투자자 (ISFJ)",
+        slogan: "신중하고 꼼꼼하게 안전을 추구한다!",
+        description: "당신은 안정과 신뢰를 중시하며, 꾸준하고 체계적인 투자 전략을 선호합니다. 🛡️",
+        image: "https://via.placeholder.com/150?text=ISFJ"
+      },
+      "INTP": {
+        title: "🧩 전략적 투자자 (INTP)",
+        slogan: "깊은 분석과 논리로 시장의 흐름을 읽는다!",
+        description: "당신은 창의적인 문제 해결과 논리적 분석을 통해 투자 결정을 내리는 타입입니다. 📊",
+        image: "https://via.placeholder.com/150?text=INTP"
+      },
+      "INTJ": {
+        title: "📈 전략적 투자자 (INTJ)",
+        slogan: "장기적 목표와 철저한 분석으로 움직인다!",
+        description: "당신은 냉철한 분석력과 미래 지향적인 계획으로 투자 시장을 선도하는 타입입니다. 🏆",
+        image: "https://via.placeholder.com/150?text=INTJ"
+      },
+      "INFJ": {
+        title: "🌌 통찰력 투자자 (INFJ)",
+        slogan: "깊은 통찰과 감성으로 시장을 바라본다!",
+        description: "당신은 내면의 직관과 깊은 감성으로 투자 기회를 포착하는 타입입니다. 🌠",
+        image: "https://via.placeholder.com/150?text=INFJ"
+      },
+      "INFP": {
+        title: "💭 이상적인 투자자 (INFP)",
+        slogan: "자신의 가치관에 따라 투자 방향을 잡는다!",
+        description: "당신은 이상과 감성을 중시하며, 투자에 있어서도 본인의 철학을 반영하는 타입입니다. 🌈",
+        image: "https://via.placeholder.com/150?text=INFP"
+      }
+    };
+
+    // 각 척도별 질문 번호 (총 20문제, 4척도별로 5문제씩)
+    const dimensions = {
+      EI: [1, 2, 3, 4, 5],
+      SN: [6, 7, 8, 9, 10],
+      TF: [11, 12, 13, 14, 15],
+      PJ: [16, 17, 18, 19, 20]
+    };
+
+    function calculateResult() {
+      const form = document.getElementById("quiz-form");
+      const formData = new FormData(form);
+      
+      // 각 척도 점수 초기화 (각 5문제, 점수 범위 -10 ~ +10)
+      let scores = { EI: 0, SN: 0, TF: 0, PJ: 0 };
+
+      // 모든 질문이 응답되었는지 확인
+      for (let i = 1; i <= 20; i++) {
+        if (!formData.get("q" + i)) {
+          alert("모든 질문에 답변해 주세요.");
+          return;
+        }
+      }
+
+      // 각 척도별 점수 합산
+      for (let [dim, qs] of Object.entries(dimensions)) {
+        qs.forEach(qNum => {
+          scores[dim] += parseInt(formData.get("q" + qNum));
+        });
+      }
+
+      // MBTI 유형 결정 (각 척도: 0 이상이면 첫번째, 미만이면 두번째)
+      const type =
+        (scores.EI >= 0 ? "E" : "I") +
+        (scores.SN >= 0 ? "S" : "N") +
+        (scores.TF >= 0 ? "T" : "F") +
+        (scores.PJ >= 0 ? "P" : "J");
+
+      // 결과 데이터 조회 (해당 유형이 없으면 기본값 사용)
+      const resultData = mbtiResults[type] || {
+        title: `투자자 (${type})`,
+        slogan: "당신만의 투자 스타일을 발견했습니다!",
+        description: "독특한 투자 전략으로 성공을 꿈꿉니다.",
+        image: "https://via.placeholder.com/150?text=" + type
+      };
+
+      // 결과 페이지 업데이트
+      document.getElementById("result-title").innerText = resultData.title;
+      document.getElementById("result-slogan").innerText = resultData.slogan;
+      document.getElementById("result-description").innerText = resultData.description;
+      document.getElementById("character-image").src = resultData.image;
+
+      // 척도 바 그래프 생성
+      const barsDiv = document.getElementById("bars");
+      barsDiv.innerHTML = "";
+      // 각 척도에 대해 막대 생성 (점수 범위 -10 ~ +10)
+      Object.entries(scores).forEach(([key, score]) => {
+        // 계산: 왼쪽(연핑크) 비율 = ((score + 10) / 20)*100, 오른쪽(연하늘) = 100 - left
+        const leftPercent = ((score + 10) / 20) * 100;
+        const rightPercent = 100 - leftPercent;
+        let labelText = "";
+        if(key === "EI") labelText = "E - I";
+        if(key === "SN") labelText = "S - N";
+        if(key === "TF") labelText = "T - F";
+        if(key === "PJ") labelText = "P - J";
+
+        barsDiv.innerHTML += `
+          <div class="bar-container">
+            <div class="bar-label">${labelText} (점수: ${score})</div>
+            <div class="bar">
+              <div class="bar-left" style="width: ${leftPercent}%;">${leftPercent.toFixed(0)}%</div>
+              <div class="bar-right" style="width: ${rightPercent}%;">${rightPercent.toFixed(0)}%</div>
+            </div>
+          </div>
+        `;
+      });
+
+      // 질문 영역 숨기고 결과 영역 표시
+      document.getElementById("quiz-section").style.display = "none";
+      document.getElementById("result-section").style.display = "block";
+    }
+  </script>
+</body>
+</html>
